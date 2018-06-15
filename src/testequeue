@@ -1,0 +1,38 @@
+#include <iostream>
+#include <list>
+#include <queue>
+#include "listacircular.h"
+#include "filacircular.h"
+using std::cout;
+using std::endl;
+using namespace myTads;
+
+int main(int argc, char const *argv[])
+{
+	// Fila implementada em um deque (default)
+	queue<string> fila;
+
+	// Fila implementada em uma lista
+	// Nota: usar espaco entre "> >"
+	//       para diferenciar de ">>" !!
+	
+	queue<string> fila_lista; 
+
+	if (fila.empty())
+		cout << "Fila vazia." << endl;
+
+	// Insere os elementos na fila
+	fila.push("Roberto"); // front -> [Roberto] <- back
+	fila.push("Antonio"); // front -> [Roberto Antonio] <- back
+	fila.push("Maria"); // front -> [Roberto Antonio Maria] <- back
+	fila.push("Paulo"); // front -> [Roberto Antonio Maria Paulo] <- back
+
+	cout << "Total de elementos: " << fila.size() << endl;
+	cout << fila << endl;
+	// Remove o elemento no topo da fila
+	//fila.pop(); // front -> [Antonio Maria Paulo] <- back
+	cout << "Primeiro da fila: " << fila.front() << endl; // Antonio
+	cout << "Ultimo da fila: " << fila.back() << endl; // Paulo*/
+	return 0;
+}
+

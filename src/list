@@ -1,0 +1,39 @@
+#include <iostream>
+#include <list>
+#include <string>
+#include "listacircular.h"
+using namespace minhasTads;
+using std::string;
+using std::cout;
+using std::endl;
+
+int main(int argc, char const *argv[])
+{
+	// Instancia uma lista de string
+	list<string> nomes;
+	nomes.push_back("Paulo"); // [Paulo]
+	nomes.push_back("Joao");  // [Paulo Joao]
+	nomes.push_back("Aline"); // [Paulo Joao Aline]
+	nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
+
+	cout << nomes << endl;
+
+	for(int i = 0 ; i < 4 ; i++ ){
+		cout << i << endl;
+		nomes.pop_front();
+	}
+	cout << "888" << endl;
+
+	nomes.push_back("Paulo"); // [Paulo]
+	nomes.push_back("Joao");  // [Paulo Joao]
+	nomes.push_back("Aline"); // [Paulo Joao Aline]
+	nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
+
+		cout << nomes << endl;
+
+
+
+	
+	return 0;
+}
+
