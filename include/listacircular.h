@@ -31,13 +31,15 @@ namespace myTads{
 		/**@brief Insere um elemento no final da lista @return retorna true se não houve erro, caso contrário retorna false */
 		bool push_back(T content);
 		/**@brief Insere um elemento em uma posição passada n da lista. */
-	 	bool insert(int pos, T content);
+	 	bool insert(unsigned int pos, T content);
 	 	/**@brief Remove o elemento que está no íncio da lista.@return retorna true se não houve erro, caso contrário, retorna false*/
 		bool pop_front();
 		/**@details Remove o lemento que está ao final da lista@return retorna true se não houve erro, caso contrário, retorna false*/
 		bool pop_back();
 		/**@details Remove o elemento na posição que foi recebida como parêmetro( lembra que o íncide inicia-se em 0).@return retorna true se não houve erro, caso contrário, retorna false*/
-		bool erase_at(int pos);
+		bool erase_at(unsigned int pos);
+		/**@brief Retorna o lemento em um índice passado */
+		T return_at(unsigned int pos);
 		/**@return retorna se a lista está ou não vázia */
 		bool empty();
 		/**@return retorna o size de lista, i.e., a quatidade de Node's */
@@ -111,8 +113,8 @@ namespace myTads{
 	}
 
 	template <typename T>
-	bool list<T>::insert(int pos, T content) {
-		if (pos<0) return false;
+	bool list<T>::insert(unsigned int pos, T content) {
+		if (pos<0 || pos>= tamanho) return false;
 		if (pos==0)	return  push_front(content);
 
 		auto atual = this->cauda->getNext();
@@ -130,6 +132,25 @@ namespace myTads{
 		atual->setNext(novo);
 		this->tamanho++;
 		return true;
+	}
+	template <typename T>
+	T list<T>::return_at(unsigned int pos)
+	{
+		//TODO colocar uma exceção aqui tmabém 
+		if (pos<0 || pos>= tamanho){
+			std::cerr << "ERRO a possição não existe na lista \n";
+			exit(1);
+		}
+
+		auto atual = this->cauda->getNext(); // primeiro elemento 
+		int posAtual = 0;
+
+		while (atual->getNext() != this->cauda && posAtual < pos-1) {
+			atual = atual->getNext();
+			posAtual++;
+		}
+
+		return atual->getValor();
 	}
 
 	template <typename T>
@@ -174,8 +195,8 @@ namespace myTads{
 	}
 
 	template <typename T>
-	bool list<T>::erase_at(int pos) {
-		//cout << "tamanho = " << this->tamanho << "\n";
+	bool list<T>::erase_at(unsigned int pos) {
+
 		if (pos < 0) return false; 
 		if (pos == 0)	return pop_front();
 		if (pos == this->tamanho -1 ) return pop_back();
