@@ -16,7 +16,6 @@ namespace myTads{
 		myTads::list<T> lista;
 		/**@brief  Armazena a quantidade de elementos que estão na fila*/
 		int tamanho;
-		
 	public:
 		/**@brief Constrotor padrão para a classe queue */
 		queue();

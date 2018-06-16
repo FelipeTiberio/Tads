@@ -2,8 +2,8 @@
 #include <vector>
 #include <stack>
 #include "listacircular.h"
-#include "pilha.h"
-#include "filacircular.h"
+#include "queue.h"
+#include "stack.h"
 #include <string>
 using std::cout;
 using std::endl;
