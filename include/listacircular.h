@@ -53,7 +53,7 @@ namespace myTads{
 
 	template <typename T>
 	Node<T>::~Node() {
-		//cout << "Node(" << valor << ") removido." << endl;
+		cout << "Node(" << valor << ") removido." << endl;
 	}
 
 	template <typename T>
@@ -120,8 +120,9 @@ namespace myTads{
 	list<T>::list(): cauda(nullptr), tamanho(0)  {}
 
 	template <typename T>
-	list<T>::~list() {
-		/*Tenho o hábito de esquecer de  implementar os destrutores, caso eu esqueça me lembrem */
+	list<T>::~list() 
+	{
+
 	}
 
 	template <typename T>
