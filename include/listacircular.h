@@ -145,7 +145,7 @@ namespace myTads{
 		auto atual = this->cauda->getNext(); // primeiro elemento 
 		int posAtual = 0;
 
-		while (atual->getNext() != this->cauda && posAtual < pos-1) {
+		while ( posAtual != pos) { // percorre a lista até  o elemento com a posição passada como argumento 
 			atual = atual->getNext();
 			posAtual++;
 		}
