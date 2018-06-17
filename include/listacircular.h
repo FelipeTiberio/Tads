@@ -197,7 +197,7 @@ namespace myTads{
 	template <typename T>
 	bool list<T>::erase_at(unsigned int pos) {
 
-		if (pos < 0) return false; 
+		//if (pos < 0) return false; 
 		if (pos == 0)	return pop_front();
 		if (pos == this->tamanho -1 ) return pop_back();
 		if (pos > this->tamanho  ) return false ;
