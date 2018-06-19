@@ -11,6 +11,7 @@ using namespace myTads;
 
 int main(int argc, char const *argv[])
 {
+	/*
 	{
 		cout << "Teste da pilha \n\n";
 		// Pilha implementada em um deque (default)
@@ -20,11 +21,11 @@ int main(int argc, char const *argv[])
 			cout << "Pilha vazia." << endl;
 		// Insere os elementos na pilha
 		pilha.push(5); // topo -> [5]
-		cout << 5;
+		cout << 5 << "\n";
 		pilha.push(7); // topo -> [7 5]
-		cout << 7;
+		cout << 7 << "\n";
 		pilha.push(2); // topo -> [2 7 5]
-		cout << 2;
+		cout << 2 << "\n";
 		cout << "Total de elementos: " << pilha.size() << endl;
 
 		// Remove o elemento no topo da pilha
@@ -60,7 +61,7 @@ int main(int argc, char const *argv[])
 		cout << "Primeiro da fila: " << fila.front() << endl; // Antonio
 		cout << "Ultimo da fila: " << fila.back() << endl; // Paulo
 	}
-
+	*/
 	{
 				// Instancia uma lista de string
 		cout << "teste da lista \n\n";
@@ -89,7 +90,7 @@ int main(int argc, char const *argv[])
 	}
 	
 
-
+	std::cout << "Fim do programa \n";
 	return 0;
 }
 

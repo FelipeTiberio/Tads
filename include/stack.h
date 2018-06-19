@@ -38,7 +38,12 @@ namespace myTads {
 
 	//Destrutor padrão
 	template <typename T>
-	stack<T>::~stack (){}
+	stack<T>::~stack ()
+	{
+		int n = tamanho;
+		for(int i = 0; i < n; i++)
+			this->pop();
+	}
 
 	//Método que verifica se a pilha esta vazia ou não
 	template <typename T>

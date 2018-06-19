@@ -2,6 +2,8 @@
 #ifndef NODE_H
 #define NODE_H
 #include <memory>
+#include <iostream>
+using std::cout; using std::endl;
 
 namespace myTads{
 
@@ -41,7 +43,7 @@ namespace myTads{
 	// Destrutor Classe Node
 	template <typename T>
 	Node<T>::~Node() {
-		//cout << "Node(" << valor << ") removido." << endl;
+		cout << "Node(" << valor << ") removido." << endl;
 	}
 
 	// Construtor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T

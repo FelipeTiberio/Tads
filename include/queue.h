@@ -46,9 +46,12 @@ namespace myTads{
 
 	// Destrutor padrão
 	template <typename T>
-	queue<T>::~queue() {
-		/**@TODO  Lembra de alterar o destrutor */
-		}
+	queue<T>::~queue() 
+	{	
+		int n = tamanho;
+		for(int i = 0; i < n; i++)
+			this->pop();
+	}
 
 	// Retorna true se a fila está vázia, caso contrário, retorna verdadeiro
 	template <typename T>
