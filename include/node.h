@@ -43,7 +43,7 @@ namespace myTads{
 	// Destrutor Classe Node
 	template <typename T>
 	Node<T>::~Node() {
-		cout << "Node(" << valor << ") removido." << endl;
+		//cout << "Node(" << valor << ") removido." << endl;
 	}
 
 	// Construtor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T

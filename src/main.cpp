@@ -80,9 +80,9 @@ int main(int argc, char const *argv[])
 		cout << "888" << endl;
 
 		nomes.push_back("Paulo"); // [Paulo]
-		nomes.push_back("Joao");  // [Paulo Joao]
-		nomes.push_back("Aline"); // [Paulo Joao Aline]
-		nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
+		//nomes.push_back("Joao");  // [Paulo Joao]
+		//nomes.push_back("Aline"); // [Paulo Joao Aline]
+		//nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
 
 			cout << nomes << endl;
 
