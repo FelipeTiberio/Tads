@@ -1,3 +1,4 @@
+//Definição e implementação da classe queue, na sua vertente genérica
 #ifndef FilaCircular_H
 #define FilaCircular_H
 #include "listacircular.h"
@@ -6,46 +7,50 @@
 
 namespace myTads{
 
-	template <typename T> class queue; // Declaracao antecipada da classe
-	template <typename T> std::ostream& operator<<( std::ostream&, queue<T> const & ); // Definicao antecipada do template para o operador de insercao
-	// --
+	// Declaracao antecipada da classe
+	template <typename T> class queue; 
+	// Definicao antecipada do template para o operador de insercao
+	template <typename T> std::ostream& operator<<( std::ostream&, queue<T> const & ); 
+	
 	template <typename T>
 	class queue {
 	private:
-		/**@details Todos os elementos da queue serão armazenados em uma Listacircular */
+		// Todos os elementos da queue serão armazenados em uma Listacircular
 		myTads::list<T> lista;
-		/**@brief  Armazena a quantidade de elementos que estão na fila*/
+		// Armazena a quantidade de elementos que estão na fila
 		int tamanho;
 	public:
-		/**@brief Constrotor padrão para a classe queue */
+		
 		queue();
-		/**@brief Destruntor para a classe queue */
+		
 		~queue();
-		/**@brief Coloca um ume elemento na fila, ou seja, coloca o elemento como o último elemento da fila */
+		
 		bool push(T content);
-		/**@brief Remove o primeiro elemento da fila */
+		
 		bool pop();
-		/**@breif Retorna o tamanho da Fila, ou seje, a quantidade de elementos que estão na fila */
+		
 		int size();
-		/**@return retorna true se a fila está vázia, caso contrário, retorna verdadeiro */
+		
 		bool empty();
-		/**@return acessa o elemento que está na frente da fila*/
+		
 		T front();
-		/**@return acessa o elemento que está na última possição */
+		
 		T back();
-		/**@details Sobrecarga do operador <<, @return retorna um std::ostream com todos os elementos da fila em uma linha separados por esparço*/
+		
 		friend std::ostream& operator<< <T>( std::ostream&, queue<T> const &l);
 	};
 
-	/*Construtor*/
+	//Construtor padrão 
 	template <typename T>
 	queue<T>::queue():  tamanho(0) {}
 
+	// Destrutor padrão
 	template <typename T>
 	queue<T>::~queue() {
 		/**@TODO  Lembra de alterar o destrutor */
 		}
 
+	// Retorna true se a fila está vázia, caso contrário, retorna verdadeiro
 	template <typename T>
 	bool queue<T>::empty()
 	{
@@ -53,6 +58,7 @@ namespace myTads{
 		return r; 
 	}
 
+	// Coloca um ume elemento na fila, ou seja, coloca o elemento como o último elemento da fila
 	template <typename T>
 	bool queue<T>::push(T content) {
 
@@ -64,6 +70,7 @@ namespace myTads{
 		return lista.push_back( content);
 	}
 
+	// Remove o primeiro elemento da fila 
 	template <typename T>
 	bool queue<T>::pop() {
 		if( lista.pop_front() == true){
@@ -74,11 +81,14 @@ namespace myTads{
 		return false;
 	}
 
+	// Retorna o tamanho da Fila, ou seja, a quantidade de elementos que estão na fila
 	template <typename T>
 	int queue<T>::size() {
 		return this->tamanho;
 	}
 
+	//Sobrecarga do operador <<, retorna um std::ostream com todos os elementos da fila
+	// em uma linha separados por espaço
 	template <typename T>
 	std::ostream& operator<< ( std::ostream& o, queue<T> const &l) {
 		if(l.tamanho==0)
@@ -90,12 +100,14 @@ namespace myTads{
 		return o;
 	}
 
+	// Acessa o elemento que está na frente da fila
 	template <typename T>
 	T queue<T>::front()
 	{
 		return this->lista.front();
 	}
 
+	// Acessa o elemento que está na última possição 
 	template <typename T>
 	T queue<T>::back()
 	{

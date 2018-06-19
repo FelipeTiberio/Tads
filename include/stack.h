@@ -1,63 +1,65 @@
-#ifndef Pilha_H
-#define Pilha_H
+//Definição e implementação da classe stack, na sua vertente genérica
+#ifndef STACK_H
+#define STACK_H
 #include <iostream>
 #include <memory>
 #include "listacircular.h"
 
 namespace myTads {
 
-	template <typename T> class stack; // Declaracao antecipada da stack
+	// Declaracao antecipada da stack
+	template <typename T> class stack; 
+	// Definicao antecipada do template para o operador de insercao
+	template <typename T> std::ostream& operator<< ( std::ostream&, list<T> const &);
 
 	template <typename T>
 	class stack{
 	private:
 		myTads::list<T> pilha;
-		/**@brief Quantidade de elementos que estão sendo guardados na pilha */
+		//Quantidade de elementos que estão sendo guardados na pilha
 		int tamanho;    
 	public:
 		stack();
 		~stack ();
-		/**@brief Retorna verdadeiro se a pilha está vázio, falso caso contrário*/
+		
 		bool empty();
-		/**@brief Retorna uma referencia para o último elemento da pila */
 		T top ();
-		/**@brief coloca um elemento no topo da fila  */
 		bool push ( T novo );
-		/**@brief remove o elemento que está no topo da fila */
 		void pop ();
-		/**@return retorna a quantidade de elemetos na pilha  r*/
 		int size();
-		/**@details Sobrecarga do operador <<, @return retorna um std::ostream com todos os elementos da lista em uma linha separados por esparço*/
+		//Sobrecarga do operador <<, retorna um std::ostream com todos os elementos
+		// da lista em uma linha separados por espaço - Falta implementar
 		friend std::ostream& operator<< <T>( std::ostream&, list<T> const &l);
 
 	};
-
+	//Construtor padrão, que instanciará a pilha com tamanho igual a zero
 	template <typename T>
 	stack<T>::stack (): tamanho(0){}
 
+	//Destrutor padrão
 	template <typename T>
-	stack<T>::~stack ()
-	{
-		/* Lembra de implementar */
-	}
+	stack<T>::~stack (){}
 
+	//Método que verifica se a pilha esta vazia ou não
 	template <typename T>
 	bool stack<T>::empty ()
 	{
 		return tamanho == 0;
 	}
 
+	//Método de empilhamento
 	template <typename T>
 	bool stack<T>::push ( T novo )
 	{
 		 this->tamanho++;
 		 return pilha.push_back(novo);
 	}
-		
+	
+	//Método de desempilhamento	
 	template <typename T>
 	void stack<T>::pop ()
 	{
-		/*TODO Talvez colocar aqui algum tipo de aqui excerção  */
+		//Verifica se a pilha está vazia. Se sim exibe mensagem de erro, se não, executa o desempilhamento	
 		if(empty()) {
 			std::cout << std::endl << "Erro: stack vazia!" << std::endl;
 		}else{
@@ -67,17 +69,20 @@ namespace myTads {
 	
 	}
 
+	//Método de acesso ao elemento do topo da pilha
 	template <typename T>
 	T stack<T>::top ()
 	{	
-		/*TODO Colocar uma exceção aqui depois */
+		// Verificação da existência de elementos na pilha. Se pilha vazia exibe mensagem, senão
+		// retorna o elemento do topo. 
 		if (empty()) {
-			std::cerr << "Acesso invalido a elemento no topo. O programa sera fechado!" << std::endl;
+			std::cerr << "Não há expressões para serem executadas. O programa sera fechado!" << std::endl;
 			exit(EXIT_FAILURE);
 		}
 		return pilha.back();
 	}
 
+	// Método de verficação do tamanho da pilha
 	template <typename T>
 	int stack<T>::size ()
 	{

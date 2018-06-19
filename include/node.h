@@ -1,72 +1,73 @@
+//Definição e implementação da classe node, na sua vertente genérica
 #ifndef NODE_H
 #define NODE_H
 #include <memory>
-using std::shared_ptr;
-
 
 namespace myTads{
 
-	template <typename T> class Node; // Declaracao antecipada da classe
-	template <typename T> // Definicao antecipada do template para o operador de insercao
-	std::ostream& operator<<( std::ostream&, Node<T> const & );
+	// Declaracao antecipada da classe
+	template <typename T> class Node; 
+	// Definicao antecipada do template para o operador de insercao
+	template <typename T> std::ostream& operator<<( std::ostream&, Node<T> const & );
 
-	//Implementação dos Node
 	template <typename T>
 	class Node
 	{
 	private:
-		/**@details elemento genérico que será usando com um Node para um conteiner */
+		// Elemento genérico que será usando com um Node para um conteiner
 		T valor;
-		/**@details  ponteiro que apontará para o próximo elemento no conteiner  */
-		shared_ptr<Node<T>> proximo;
+		// Ponteiro que apontará para o próximo elemento no conteiner 
+		std::shared_ptr<Node<T>> proximo;
 	public:
-		/**@brief  Construtor padrão para a classe Node*/
-		Node();
-		/**@brief Contrutor parametrizado para a classe Node,@param recebe com parâmetro um elemento genérico do tipo T */
-		Node(T content);
-		/**@brief Destrutor Classe Node*/
-		~Node();
-		/**@details Contrutor parametrizado para a classe Node,@param recebe com parâmetro um elemento genérico do tipo T, e um ponteiro para um objeto do tipo Node */
-		Node(T num, shared_ptr<Node> nextPtr);
-		/**@return Retorna o valor armazenado em um Node */
-		T getValor();
-		/**@return Retorna um ponteiro para o elemento posterio ao objeto que o chamou */
-		shared_ptr<Node<T>> getNext();
-		/**@brief Setter para quem o Node está apontando */
-		void setNext(shared_ptr<Node<T>> nextPtr);
-		/**@brief Sobrecagar do operador <<*/
+		
+		Node();		
+		Node(T content);		
+		~Node();		
+		Node(T num, std::shared_ptr<Node> nextPtr);		
+		T getValor();		
+		std::shared_ptr<Node<T>> getNext();		
+		void setNext(std::shared_ptr<Node<T>> nextPtr);		
 		friend std::ostream& operator<< <T>(std::ostream &o, Node<T> const &n);
 	};
 
+	// Construtor padrão para a classe Node 
 	template <typename T>
 	Node<T>::Node() : valor(), proximo(nullptr) {}
 
+	// Contrutor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T 
 	template <typename T>
 	Node<T>::Node(T content) : valor(content), proximo(nullptr) {}
 
+	// Destrutor Classe Node
 	template <typename T>
 	Node<T>::~Node() {
 		//cout << "Node(" << valor << ") removido." << endl;
 	}
 
+	// Construtor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T
+	// e um ponteiro para um objeto do tipo Node
 	template <typename T>
-	Node<T>::Node(T content, shared_ptr<Node<T>> nextPtr) : valor(content), proximo(nextPtr) {}
+	Node<T>::Node(T content, std::shared_ptr<Node<T>> nextPtr) : valor(content), proximo(nextPtr) {}
 
+	// Retorna o valor armazenado em um Node
 	template <typename T>
 	T Node<T>::getValor() {
 		return valor;
 	}
 
+	// Retorna um ponteiro para o elemento posterio ao objeto que o chamou 
 	template <typename T>
-	shared_ptr<Node<T>> Node<T>::getNext() {
+	std::shared_ptr<Node<T>> Node<T>::getNext() {
 		return proximo;
 	}
 
+	// Setter para quem o Node está apontando
 	template <typename T>
-	void Node<T>::setNext(shared_ptr<Node<T>> nextPtr) {
+	void Node<T>::setNext(std::shared_ptr<Node<T>> nextPtr) {
 		proximo = nextPtr;
 	}
 
+	// Sobrecarga do operador <<
 	template <typename T>
 	std::ostream& operator<< (std::ostream &o, Node<T> const &n) {
 		o << n.valor;
