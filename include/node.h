@@ -34,6 +34,8 @@ namespace myTads{
 
 		void plus();
 
+		int getRepeticoes();
+
 
 	};
 
@@ -43,7 +45,7 @@ namespace myTads{
 
 	// Contrutor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T 
 	template <typename T>
-	Node<T>::Node(T content) : valor(content), proximo(nullptr), repete(0) {}
+	Node<T>::Node(T content) : valor(content), proximo(nullptr), repete(1) {}
 
 	// Destrutor Classe Node
 	template <typename T>
@@ -84,7 +86,12 @@ namespace myTads{
 	template <typename T>
 	void Node<T>::plus()
 	{
-
+		repete++;
+	}
+	template <typename T>
+	int Node<T>::getRepeticoes()
+	{
+		return repete;
 	}
 
 }

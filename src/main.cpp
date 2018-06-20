@@ -28,47 +28,68 @@ int main(int argc, char const *argv[])
 {
 	
 	std::ifstream arquivo("arq/file.txt");
-	if(!arquivo)
+
+	if(arquivo)
 	{
+		std::vector<shared_ptr<Node<string>>> tabela;
+		tabela.resize(53,nullptr);
+
+		std::string palavra_aux;
+		int pos = 0;
+
+		int conta = 1;
+
+		while(!arquivo.eof()) // condicional está lendo o arquivo 
+		{
+		
+			getline(arquivo, palavra_aux, ' ');
+			pos = dispen(palavra_aux);
+			bool existe{false};
+			cout << "Iterações " << conta << endl;
+			conta +=1;
+
+			if(tabela[pos]==nullptr) // verifica se na possição já existe um valor
+			{
+				if(palavra_aux.at(0) != '\n')
+				tabela[pos] = make_shared<Node<string>>(palavra_aux);
+				continue;
+			}
+
+			if(tabela[pos] != nullptr){ // verifica se já existe a palavra na linha da tabela 
+				int atual = pos;
+
+				do{ // percorre toda a linha da tabela 
+					if(tabela[atual]->getValor() == palavra_aux ){ // se palavra está na linha 
+						tabela[atual++]->plus();
+						existe = true;
+					}
+
+				}while(tabela[atual]->getNext() != nullptr);
+			}
+			cout << "antes do if\n";
+			if(existe == false){ // caso não exista a palavra na tabela, cria um novo node e a coloca
+				tabela[pos]->setNext(make_shared<Node<string>>(palavra_aux));
+				cout << "entrei aqui\n";
+			}
+		}
+		cout << " Valores na Tabela\n";
+		for(int i = 0; i < 53 ; i++ ){
+
+			if(tabela[i] != nullptr){
+				cout << "["<< i << "] " << tabela[i]->getValor() << "=" << tabela[i]->getRepeticoes() ;
+				while(tabela[i]->getNext() != nullptr){
+					cout << " | " << tabela[i]->getValor() << " | ";
+				}
+				cout << endl;
+			}
+			
+		}
+		
+	}else{
 		cout << "Erro na leitura do arquivo \n";
 		exit(1);
 	}
 
-	std::vector<shared_ptr<Node<string>>> tabela;
-	tabela.resize(53,nullptr);
-	std::string line;
-	std::string palavra_aux;
-
-	int pos = 0;
-
-	while(getline(arquivo, line)) // condicional está lendo o arquivo 
-	{
-		std::stringstream  str(line);
-		std::getline(str, palavra_aux, ' ');
-		pos = dispen(palavra_aux);
-		bool existe{false};
-
-		if(tabela[pos]==nullptr) // verifica se na possição já existe um valor
-		{
-			tabela[pos] = make_shared<Node<string>>(palavra_aux);
-			continue;
-		}
-		
-		else if(tabela[pos] != nullptr){ // verifica se já existe a palavra na linha da tabela 
-			int atual = pos;
-
-			do{ // percorre toda a linha da tabela 
-				if(tabela[atual]->getValor()==palavra_aux){ // se palavra está na linha 
-					tabela[atual++]->plus();
-					existe = true;
-				}
-
-			}while(tabela[pos]->getNext() != nullptr);
-		}
-		else if(existe == false){ // caso não exista a palavra na tabela, cria um novo node e a coloca
-			tabela[pos]->setNext(make_shared<Node<string>>(palavra_aux));
-		}
-	}
 
 
 	return 0;
