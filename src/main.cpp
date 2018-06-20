@@ -20,35 +20,55 @@ int dispen(std::string palavra){
 	{
 		cont+= (int)(palavra.at(i));
 	}
-	return 53;
+	return cont % 53;
 }
 
 
 int main(int argc, char const *argv[])
 {
 	
-	std::ifstream arquivo("arquivo.txt");
+	std::ifstream arquivo("arq/file.txt");
 	if(!arquivo)
 	{
 		cout << "Erro na leitura do arquivo \n";
 		exit(1);
 	}
 
-	std::vector<shared_ptr<Node<string>>> vect;
-	vect.resize(53,nullptr);
+	std::vector<shared_ptr<Node<string>>> tabela;
+	tabela.resize(53,nullptr);
 	std::string line;
 	std::string palavra_aux;
 
-	int possicao = 0;
+	int pos = 0;
 
-	while(getline(arquivo, line))
+	while(getline(arquivo, line)) // condicional está lendo o arquivo 
 	{
 		std::stringstream  str(line);
 		std::getline(str, palavra_aux, ' ');
-		possicao = dispen(palavra_aux);
+		pos = dispen(palavra_aux);
+		bool existe{false};
 
+		if(tabela[pos]==nullptr) // verifica se na possição já existe um valor
+		{
+			tabela[pos] = make_shared<Node<string>>(palavra_aux);
+			continue;
+		}
+		
+		else if(tabela[pos] != nullptr){ // verifica se já existe a palavra na linha da tabela 
+			int atual = pos;
+
+			do{ // percorre toda a linha da tabela 
+				if(tabela[atual]->getValor()==palavra_aux){ // se palavra está na linha 
+					tabela[atual++]->plus();
+					existe = true;
+				}
+
+			}while(tabela[pos]->getNext() != nullptr);
+		}
+		else if(existe == false){ // caso não exista a palavra na tabela, cria um novo node e a coloca
+			tabela[pos]->setNext(make_shared<Node<string>>(palavra_aux));
+		}
 	}
-
 
 
 	return 0;

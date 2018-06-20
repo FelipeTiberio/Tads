@@ -20,6 +20,7 @@ namespace myTads{
 		T valor;
 		// Ponteiro que apontará para o próximo elemento no conteiner 
 		std::shared_ptr<Node<T>> proximo;
+		int repete;
 	public:
 		
 		Node();		
@@ -30,6 +31,10 @@ namespace myTads{
 		std::shared_ptr<Node<T>> getNext();		
 		void setNext(std::shared_ptr<Node<T>> nextPtr);		
 		friend std::ostream& operator<< <T>(std::ostream &o, Node<T> const &n);
+
+		void plus();
+
+
 	};
 
 	// Construtor padrão para a classe Node 
@@ -38,7 +43,7 @@ namespace myTads{
 
 	// Contrutor parametrizado para a classe Node,recebe com parâmetro um elemento genérico do tipo T 
 	template <typename T>
-	Node<T>::Node(T content) : valor(content), proximo(nullptr) {}
+	Node<T>::Node(T content) : valor(content), proximo(nullptr), repete(0) {}
 
 	// Destrutor Classe Node
 	template <typename T>
@@ -74,6 +79,12 @@ namespace myTads{
 	std::ostream& operator<< (std::ostream &o, Node<T> const &n) {
 		o << n.valor;
 		return o;
+	}
+
+	template <typename T>
+	void Node<T>::plus()
+	{
+
 	}
 
 }
