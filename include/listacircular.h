@@ -58,18 +58,20 @@ namespace myTads{
 	template <typename T>
 	list<T>::~list() 
 	{
-		
+		if(tamanho != 0)
+		{
 		auto atual = this->cauda->getNext(); // primeiro elemento 
 		int posAtual = 0;
-
-		while ( posAtual != tamanho-1) { // percorre a lista até  o elemento com a posição passada como argumento
-			cauda->setNext(atual->getNext()->getNext()); 
-			atual = atual->getNext();
-			posAtual++;
-			cout << posAtual << "** \n";
+		
+			while ( posAtual != tamanho-1) { // percorre a lista até  o elemento com a posição passada como argumento
+				cauda->setNext(atual->getNext()->getNext()); 
+				atual = atual->getNext();
+				posAtual++;
+				cout << posAtual << "** \n";
+			}
+			this->cauda->setNext(nullptr);
 		}
-		this->cauda->setNext(nullptr);
-		cout << "tamanho = " << tamanho << "\n";
+		
 		tamanho =0;
 
 	}
