@@ -1,97 +1,55 @@
 #include <iostream>
+#include <random>
 #include <vector>
-#include <stack>
 #include "listacircular.h"
-#include "queue.h"
-#include "stack.h"
-#include <string>
-using std::cout;
-using std::endl;
+#include <memory>
+#include <fstream>
+#include <sstream>
+#include "node.h"
+
+using std::shared_ptr; using std::vector;
+using std::make_shared; using std::endl;
+using std::cout; using std::string; using std::ifstream;
 using namespace myTads;
 
-int main(int argc, char const *argv[])
-{
-	/*
+
+int dispen(std::string palavra){
+	int cont = 0;
+
+	for(unsigned int i =0 ; i < palavra.size(); i++)
 	{
-		cout << "Teste da pilha \n\n";
-		// Pilha implementada em um deque (default)
-		myTads::stack<int> pilha;
-
-		if (pilha.empty())
-			cout << "Pilha vazia." << endl;
-		// Insere os elementos na pilha
-		pilha.push(5); // topo -> [5]
-		cout << 5 << "\n";
-		pilha.push(7); // topo -> [7 5]
-		cout << 7 << "\n";
-		pilha.push(2); // topo -> [2 7 5]
-		cout << 2 << "\n";
-		cout << "Total de elementos: " << pilha.size() << endl;
-
-		// Remove o elemento no topo da pilha
-		pilha.pop(); // topo -> [7 5]
-
-		cout << "Elemento no topo da pilha: " << pilha.top() << endl;
+		cont+= (int)(palavra.at(i));
 	}
-	
-	{
-		cout << "Teste da fila \n\n";
-		// Fila implementada em um deque (default)
-		queue<string> fila;
-
-		// Fila implementada em uma lista
-		// Nota: usar espaco entre "> >"
-		//       para diferenciar de ">>" !!
-		
-		queue<string> fila_lista; 
-
-		if (fila.empty())
-			cout << "Fila vazia." << endl;
-
-		// Insere os elementos na fila
-		fila.push("Roberto"); // front -> [Roberto] <- back
-		fila.push("Antonio"); // front -> [Roberto Antonio] <- back
-		fila.push("Maria"); // front -> [Roberto Antonio Maria] <- back
-		fila.push("Paulo"); // front -> [Roberto Antonio Maria Paulo] <- back
-
-		cout << "Total de elementos: " << fila.size() << endl;
-		cout << fila << endl;
-		// Remove o elemento no topo da fila
-		//fila.pop(); // front -> [Antonio Maria Paulo] <- back
-		cout << "Primeiro da fila: " << fila.front() << endl; // Antonio
-		cout << "Ultimo da fila: " << fila.back() << endl; // Paulo
-	}
-	*/
-	{
-				// Instancia uma lista de string
-		cout << "teste da lista \n\n";
-		list<string> nomes;
-		nomes.push_back("Paulo"); // [Paulo]
-		nomes.push_back("Joao");  // [Paulo Joao]
-		nomes.push_back("Aline"); // [Paulo Joao Aline]
-		nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
-
-		cout << nomes << endl;
-
-		for(int i = 0 ; i < 4 ; i++ ){
-			cout << i << endl;
-			nomes.pop_front();
-		}
-		cout << "888" << endl;
-
-		nomes.push_back("Paulo"); // [Paulo]
-		//nomes.push_back("Joao");  // [Paulo Joao]
-		//nomes.push_back("Aline"); // [Paulo Joao Aline]
-		//nomes.push_back("Mauricio"); // [Paulo Joao Aline Mauricio]
-
-			cout << nomes << endl;
-
-
-	}
-	
-
-	std::cout << "Fim do programa \n";
-	return 0;
+	return 53;
 }
 
 
+int main(int argc, char const *argv[])
+{
+	
+	std::ifstream arquivo("arquivo.txt");
+	if(!arquivo)
+	{
+		cout << "Erro na leitura do arquivo \n";
+		exit(1);
+	}
+
+	std::vector<shared_ptr<Node<string>>> vect;
+	vect.resize(53,nullptr);
+	std::string line;
+	std::string palavra_aux;
+
+	int possicao = 0;
+
+	while(getline(arquivo, line))
+	{
+		std::stringstream  str(line);
+		std::getline(str, palavra_aux, ' ');
+		possicao = dispen(palavra_aux);
+
+	}
+
+
+
+	return 0;
+}
