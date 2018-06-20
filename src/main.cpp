@@ -31,64 +31,73 @@ int main(int argc, char const *argv[])
 
 	if(arquivo)
 	{
-		std::vector<shared_ptr<Node<string>>> tabela;
+		std::vector<shared_ptr<list<string>>> tabela;
 		tabela.resize(53,nullptr);
 
+		bool existe_lista = false; // verifica se já existe uma lista em uma posição do vector
 		std::string palavra_aux;
 		int pos = 0;
-
-		int conta = 1;
-
+	
 		while(!arquivo.eof()) // condicional está lendo o arquivo 
 		{
-		
 			getline(arquivo, palavra_aux, ' ');
 			pos = dispen(palavra_aux);
-			bool existe{false};
-			cout << "Iterações " << conta << endl;
-			conta +=1;
 
-			if(tabela[pos]==nullptr) // verifica se na possição já existe um valor
+			if(tabela[pos]==nullptr) // verifica se na possição já existe um valor, se não criar a tabela com o valor 
 			{
 				if(palavra_aux.at(0) != '\n')
-				tabela[pos] = make_shared<Node<string>>(palavra_aux);
+					tabela[pos] = make_shared<list<string>>(palavra_aux);
 				continue;
-			}
+			}else if(tabela[pos] != nullptr)// verifica se já existe a palavra na linha da tabela, se sim aumenta o contador 
+			{ 
+				int n  = tabela[pos]->size();
+				auto atual = tabela[pos];
+				existe_lista = true;
 
-			if(tabela[pos] != nullptr){ // verifica se já existe a palavra na linha da tabela 
-				int atual = pos;
-
-				do{ // percorre toda a linha da tabela 
-					if(tabela[atual]->getValor() == palavra_aux ){ // se palavra está na linha 
-						tabela[atual++]->plus();
-						existe = true;
+				for(int i = 0; i < n; i++ )// percorre toda linha procurando por palavras repitidas 
+				{ 
+					//cout  << atual->return_at(i) << " = " << palavra_aux << " valor = " << (atual->return_at(i) == palavra_aux) << endl ;
+					if(atual->return_at(i) == palavra_aux)
+					{
+						atual->plus_at(i);
+						continue;
 					}
-
-				}while(tabela[atual]->getNext() != nullptr);
+				}			
+			}else if((existe_lista == true)) // caso já se tenha instanciando uma lista ẽ na linha a palavra não exista 
+			{
+				cout << " entrei aqui " << palavra_aux << endl;
+				auto atual = tabela[pos];
+				atual->push_back(palavra_aux);
 			}
-			cout << "antes do if\n";
-			if(existe == false){ // caso não exista a palavra na tabela, cria um novo node e a coloca
-				tabela[pos]->setNext(make_shared<Node<string>>(palavra_aux));
-				cout << "entrei aqui\n";
-			}
+		
 		}
-		cout << " Valores na Tabela\n";
-		for(int i = 0; i < 53 ; i++ ){
 
-			if(tabela[i] != nullptr){
-				cout << "["<< i << "] " << tabela[i]->getValor() << "=" << tabela[i]->getRepeticoes() ;
-				while(tabela[i]->getNext() != nullptr){
-					cout << " | " << tabela[i]->getValor() << " | ";
+		cout << " Valores na Tabela\n";
+		for(int i = 0; i < 53 ; i++)
+		{
+			if(tabela[i] !=nullptr){
+				auto atual = tabela[i];
+				cout <<"["<< i << "]" << atual->front() << "=" << atual->return_rep(0) ;
+				cout << "** tamanho das listas **  = " << atual->size() ;
+				for(int j = 1; j <= atual->size() ; j++)
+				{
+					if(!(j>atual->size()-1))
+					cout << " | " << atual->return_at(j) << "=" << atual->return_rep(j);
 				}
 				cout << endl;
-			}
-			
+			}			
 		}
 		
-	}else{
+		
+	}else
+	{
 		cout << "Erro na leitura do arquivo \n";
 		exit(1);
 	}
+
+	
+
+
 
 
 

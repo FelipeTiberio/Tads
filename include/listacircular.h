@@ -20,8 +20,9 @@ namespace myTads{
 		/**@brief causa é  um ponteiro que ira apontar para o último Node da lista*/
 		shared_ptr<Node<T>> cauda;
 		/**@breif O atributo tamanho mastra quantos elementos estão atualmente na lista */
-		int tamanho;
+		unsigned int tamanho;
 	public:
+		list(T valor);
 		/**@brief Construtor padrão classe list*/
 		list();
 		/**@brief Destrutor classe list */
@@ -41,6 +42,8 @@ namespace myTads{
 		/**@brief Retorna o lemento em um índice passado */
 		T return_at(unsigned int pos);
 		/**@return retorna se a lista está ou não vázia */
+		int return_rep(unsigned int pos);
+		void plus_at(unsigned int pos);
 		bool empty();
 		/**@return retorna o size de lista, i.e., a quatidade de Node's */
 	    int size();
@@ -51,6 +54,11 @@ namespace myTads{
 		/**@details Sobrecarga do operador <<, @return retorna um std::ostream com todos os elementos da lista em uma linha separados por esparço*/
 		friend std::ostream& operator<< <T>( std::ostream&, list<T> const &l);
 	};
+	template <typename T>
+	list<T>::list(T valor): cauda(nullptr), tamanho(0)
+	{
+		push_front(valor);
+	}
 
 	template <typename T>
 	list<T>::list(): cauda(nullptr), tamanho(0)  {}
@@ -61,7 +69,7 @@ namespace myTads{
 		if(tamanho != 0)
 		{
 		auto atual = this->cauda->getNext(); // primeiro elemento 
-		int posAtual = 0;
+		unsigned int posAtual = 0;
 		
 			while ( posAtual != tamanho-1) { // percorre a lista até  o elemento com a posição passada como argumento
 				cauda->setNext(atual->getNext()->getNext()); 
@@ -158,7 +166,7 @@ namespace myTads{
 		}
 
 		auto atual = this->cauda->getNext(); // primeiro elemento 
-		int posAtual = 0;
+		unsigned int posAtual = 0;
 
 		while ( posAtual != pos) { // percorre a lista até  o elemento com a posição passada como argumento 
 			atual = atual->getNext();
@@ -166,6 +174,46 @@ namespace myTads{
 		}
 
 		return atual->getValor();
+	}
+
+	template <typename T>
+	int list<T>::return_rep(unsigned int pos)
+	{
+		//TODO colocar uma exceção aqui tmabém 
+		if (pos<0 || pos>= tamanho){
+			std::cerr << "ERRO a possição não existe na lista \n";
+			exit(1);
+		}
+
+		auto atual = this->cauda->getNext(); // primeiro elemento 
+		unsigned int posAtual = 0;
+
+		while ( posAtual != pos) { // percorre a lista até  o elemento com a posição passada como argumento 
+			atual = atual->getNext();
+			posAtual++;
+		}
+
+		return atual->getRepeticoes();
+	}
+
+	template <typename T>
+	void list<T>::plus_at(unsigned int pos)
+	{
+		//TODO colocar uma exceção aqui tmabém 
+		if (pos<0 || pos>= tamanho){
+			std::cerr << "ERRO a possição não existe na lista \n";
+			exit(1);
+		}
+
+		auto atual = this->cauda->getNext(); // primeiro elemento 
+		unsigned int posAtual = 0;
+
+		while ( posAtual != pos) { // percorre a lista até  o elemento com a posição passada como argumento 
+			atual = atual->getNext();
+			posAtual++;
+		}
+
+		atual->plus();
 	}
 
 	template <typename T>
