@@ -35,6 +35,7 @@ int main(int argc, char const *argv[])
 		tabela.resize(53,nullptr);
 
 		bool existe_lista = false; // verifica se já existe uma lista em uma posição do vector
+		bool repete = false;
 		std::string palavra_aux;
 		int pos = 0;
 	
@@ -60,29 +61,28 @@ int main(int argc, char const *argv[])
 					if(atual->return_at(i) == palavra_aux)
 					{
 						atual->plus_at(i);
+						repete = true;
 						continue;
 					}
 				}			
-			}else if((existe_lista == true)) // caso já se tenha instanciando uma lista ẽ na linha a palavra não exista 
+			}if(existe_lista && (repete == false)) // caso já se tenha instanciando uma lista ẽ na linha a palavra não exista 
 			{
-				cout << " entrei aqui " << palavra_aux << endl;
 				auto atual = tabela[pos];
 				atual->push_back(palavra_aux);
 			}
 		
 		}
 
-		cout << " Valores na Tabela\n";
+		cout << "** VALORES NA TABELA  **\n";
 		for(int i = 0; i < 53 ; i++)
 		{
 			if(tabela[i] !=nullptr){
 				auto atual = tabela[i];
-				cout <<"["<< i << "]" << atual->front() << "=" << atual->return_rep(0) ;
-				cout << "** tamanho das listas **  = " << atual->size() ;
+				cout <<"["<< i << "] [" << atual->front() << " = " << atual->return_rep(0) << "] ";
 				for(int j = 1; j <= atual->size() ; j++)
 				{
 					if(!(j>atual->size()-1))
-					cout << " | " << atual->return_at(j) << "=" << atual->return_rep(j);
+					cout << " [ " << atual->return_at(j) << " = " << atual->return_rep(j) << "] ";
 				}
 				cout << endl;
 			}			
