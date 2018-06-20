@@ -75,7 +75,6 @@ namespace myTads{
 				cauda->setNext(atual->getNext()->getNext()); 
 				atual = atual->getNext();
 				posAtual++;
-				cout << posAtual << "** \n";
 			}
 			this->cauda->setNext(nullptr);
 		}

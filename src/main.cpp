@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include "node.h"
-
+#define MOD 53
 using std::shared_ptr; using std::vector;
 using std::make_shared; using std::endl;
 using std::cout; using std::string; using std::ifstream;
@@ -20,7 +20,7 @@ int dispen(std::string palavra){
 	{
 		cont+= (int)(palavra.at(i));
 	}
-	return cont % 53;
+	return cont % MOD;
 }
 
 
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
 	if(arquivo)
 	{
 		std::vector<shared_ptr<list<string>>> tabela;
-		tabela.resize(53,nullptr);
+		tabela.resize(MOD,nullptr);
 
 		bool existe_lista = false; // verifica se já existe uma lista em uma posição do vector
 		bool repete = false;
@@ -73,8 +73,8 @@ int main(int argc, char const *argv[])
 		
 		}
 
-		cout << "** VALORES NA TABELA  **\n";
-		for(int i = 0; i < 53 ; i++)
+		cout << "** VALORES NA TABELA COM " << MOD << " LINHAS **\n";
+		for(int i = 0; i < MOD ; i++)
 		{
 			if(tabela[i] !=nullptr){
 				auto atual = tabela[i];
